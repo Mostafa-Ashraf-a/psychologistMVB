@@ -54,14 +54,22 @@ namespace MentalHealthAssessment.Infrastructure.Services
                 throw new ArgumentException("Invalid Role. Must be 'Admin', 'Consultant', or 'Patient'.");
             }
 
-            // Standardize Phone for Saudi Arabia
+            // Standardize Phone for Saudi Arabia and Egypt (for testing)
             var phone = request.PhoneNumber.Trim();
             var formattedPhone = phone;
             if (!formattedPhone.StartsWith("+"))
             {
-                // Strip leading zero if present and prefix with +966
                 var stripped = formattedPhone.StartsWith("0") ? formattedPhone.Substring(1) : formattedPhone;
-                formattedPhone = $"+966{stripped}";
+                if (formattedPhone.StartsWith("01") || formattedPhone.StartsWith("1"))
+                {
+                    // Egyptian mobile number
+                    formattedPhone = $"+20{stripped}";
+                }
+                else
+                {
+                    // Default to Saudi Arabia mobile number
+                    formattedPhone = $"+966{stripped}";
+                }
             }
 
             // In Firebase, we will use a pseudo-email based on the phone number
