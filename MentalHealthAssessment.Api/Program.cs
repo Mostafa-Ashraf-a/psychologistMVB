@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using MentalHealthAssessment.Infrastructure.Data;
+using MentalHealthAssessment.Application.Interfaces;
+using MentalHealthAssessment.Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +24,9 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"),
         b => b.MigrationsAssembly("MentalHealthAssessment.Api")));
+
+// Register Firestore Service
+builder.Services.AddSingleton<IFirestoreService, FirestoreService>();
 
 var app = builder.Build();
 
