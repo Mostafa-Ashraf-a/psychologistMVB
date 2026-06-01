@@ -1,0 +1,15 @@
+bin/
+obj/
+*.user
+*.suo
+*.log
+*.vs
+*.vscode
+*.DS_Store
+*.dll
+*.exe
+*.pdb
+*.mdb
+*.cache
+*.csproj.user
+*.sln.dotsettings
