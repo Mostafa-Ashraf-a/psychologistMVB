@@ -7,6 +7,17 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
+// Register the Swagger generator, defining 1 or more Swagger documents
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+    {
+        Title = "Mental Health Assessment API",
+        Version = "v1",
+        Description = "API for the Mental Health Assessment System in KSA"
+    });
+});
+
 // Configure PostgreSQL DbContext
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"),
@@ -14,11 +25,13 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+// Enable Swagger UI in both development and production for easy API viewing by the user
+app.UseSwagger();
+app.UseSwaggerUI(c =>
 {
-    app.UseDeveloperExceptionPage();
-}
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Mental Health Assessment API v1");
+    c.RoutePrefix = string.Empty; // Serve Swagger UI at the application's root (e.g. http://localhost:5000/)
+});
 
 app.UseHttpsRedirection();
 
