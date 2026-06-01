@@ -18,7 +18,7 @@ namespace MentalHealthAssessment.Infrastructure.Services
         {
             _httpClient = httpClient;
             _apiKey = configuration["Gemini:ApiKey"] ?? "";
-            _modelName = configuration["Gemini:ModelName"] ?? "gemini-1.5-flash";
+            _modelName = configuration["Gemini:ModelName"] ?? "gemini-3-flash";
         }
 
         public async Task<string> AnalyzeChatResponseAsync(string conversationHistory, string latestUserMessage, string questionOptionsJson)
