@@ -13,3 +13,4 @@ obj/
 *.cache
 *.csproj.user
 *.sln.dotsettings
+*firebase-adminsdk*.json
