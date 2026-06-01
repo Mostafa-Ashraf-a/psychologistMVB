@@ -82,6 +82,9 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 // Register Firestore Service
 builder.Services.AddSingleton<IFirestoreService, FirestoreService>();
 
+// Register HttpClient and Gemini AI Service
+builder.Services.AddHttpClient<IGeminiService, GeminiService>();
+
 var app = builder.Build();
 
 // Enable Swagger UI in both development and production
