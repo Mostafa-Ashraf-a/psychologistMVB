@@ -65,7 +65,7 @@ namespace MentalHealthAssessment.Infrastructure.Services
             }
 
             // In Firebase, we will use a pseudo-email based on the phone number
-            var email = $"{phone}@psychologist.mvp";
+            var email = $"{phone}@gmail.com";
 
             try
             {
@@ -141,7 +141,7 @@ namespace MentalHealthAssessment.Infrastructure.Services
             if (isPhone)
             {
                 phone = usernameOrPhone;
-                email = $"{phone}@psychologist.mvp";
+                email = $"{phone}@gmail.com";
 
                 // Query Firestore to get username and role
                 var usersQuery = _firestoreDb.Collection("users").WhereEqualTo("phoneNumber", phone);
@@ -171,7 +171,7 @@ namespace MentalHealthAssessment.Infrastructure.Services
                 username = userDoc.GetValue<string>("username");
                 phone = userDoc.GetValue<string>("phoneNumber");
                 role = userDoc.GetValue<string>("role");
-                email = $"{phone}@psychologist.mvp";
+                email = $"{phone}@gmail.com";
             }
 
             try
